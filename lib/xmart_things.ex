@@ -23,7 +23,10 @@ defmodule XmartThings do
       end
   """
 
+  alias OAuth2.Strategy.AuthCode
   use OAuth2.Strategy
+
+  @endpoint_uri "https://graph.api.smartthings.com/api/smartapps/endpoints"
 
   def client do
     OAuth2.Client.new([
@@ -46,15 +49,18 @@ defmodule XmartThings do
   end
 
   def authorize_url(client, params) do
-    OAuth2.Strategy.AuthCode.authorize_url(client, params)
+    AuthCode.authorize_url(client, params)
   end
 
   def get_token(client, params, headers) do
     client
     |> put_param(:client_secret, client.client_secret)
     |> put_header("accept", "application/json")
-    |> OAuth2.Strategy.AuthCode.get_token(params, headers)
+    |> AuthCode.get_token(params, headers)
   end
+
+  def endpoints(client), do: client |> __MODULE__.get(@endpoint_uri)
+  def endpoints!(client), do: client |> __MODULE__.get!(@endpoint_uri)
 
   defdelegate get!(client, endpoint), to: OAuth2.Client
   defdelegate get!(client, endpoint, headers), to: OAuth2.Client
