@@ -1,2 +1,45 @@
 defmodule XmartThings do
+  @moduledoc """
+  OAuth Strategy module to work with SmartThings Web Services API
+  """
+
+  use OAuth2.Strategy
+
+  def client do
+    OAuth2.Client.new([
+      strategy: __MODULE__,
+      client_id: client_id,
+      client_secret: client_secret,
+      redirect_uri: redirect_uri,
+      site: "https://graph.api.smartthings.com",
+      authorize_url: "https://graph.api.smartthings.com/oauth/authorize",
+      token_url: "https://graph.api.smartthings.com/oauth/token"
+    ])
+  end
+
+  def authorize_url! do
+    OAuth2.Client.authorize_url!(client, scope: scope)
+  end
+
+  def get_token!(params \\ [], headers \\ [], opts \\ []) do
+    OAuth2.Client.get_token!(client(), params, headers, opts)
+  end
+
+  def authorize_url(client, params) do
+    OAuth2.Strategy.AuthCode.authorize_url(client, params)
+  end
+
+  def get_token(client, params, headers) do
+    client
+    |> put_param(:client_secret, client.client_secret)
+    |> put_header("accept", "application/json")
+    |> OAuth2.Strategy.AuthCode.get_token(params, headers)
+  end
+
+  defp client_id, do: Application.get_env(:xmart_things, :client_id)
+  defp client_secret, do: Application.get_env(:xmart_things, :client_secret)
+  defp redirect_uri, do: Application.get_env(:xmart_things, :redirect_uri)
+  defp display_link, do: Application.get_env(:xmart_things, :display_link)
+  defp display_name, do: Application.get_env(:xmart_things, :display_name)
+  defp scope, do: Application.get_env(:xmart_things, :scope) || "app"
 end
