@@ -1,0 +1,2 @@
+defmodule XmartThings do
+end
