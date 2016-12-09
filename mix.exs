@@ -5,8 +5,12 @@ defmodule XmartThings.Mixfile do
     [app: :xmart_things,
      version: "0.1.0",
      elixir: "~> 1.3",
+     description: "SmartThings OAuth2 Strategy for Elixir",
+     source_url: "https://github.com/techgaun/xmart_things",
+     package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     docs: [extras: ["README.md"]],
      deps: deps()]
   end
 
@@ -29,7 +33,19 @@ defmodule XmartThings.Mixfile do
   defp deps do
     [
       {:oauth2, "~> 0.8.2"},
-      {:poison, "~> 3.0"}
+      {:poison, "~> 3.0"},
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: [
+        "Samar Acharya"
+      ],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/techgaun/xmart_things"}
     ]
   end
 end

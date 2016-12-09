@@ -1,6 +1,26 @@
 defmodule XmartThings do
   @moduledoc """
   OAuth Strategy module to work with SmartThings Web Services API
+
+  ## Examples
+
+      # Generate the authorization to redirect client for authorization
+      XmartThings.authorize_url!
+
+      # Capture the `code` from redirect in your callback handler route
+      st_client = XmartThings.get_token!(code: code)
+
+      # Use the access token to access resources
+      locks = XmartThings.get!(st_client, "/locks").body
+
+      case XmartThings.get(st_client, "/locks") do
+        {:ok, %OAuth2.Response{status_code: 401, body: body}} ->
+          {:error, "unauthorized token"}
+        {:ok, %OAuth2.Response{status_code: status_code, body: locks}} when status_code in [200..399] ->
+          locks
+        {:error, %OAuth2.Error{reason: reason}} ->
+          {:error, reason}
+      end
   """
 
   use OAuth2.Strategy
@@ -35,6 +55,13 @@ defmodule XmartThings do
     |> put_header("accept", "application/json")
     |> OAuth2.Strategy.AuthCode.get_token(params, headers)
   end
+
+  defdelegate get!(client, endpoint), to: OAuth2.Client
+  defdelegate get!(client, endpoint, headers), to: OAuth2.Client
+  defdelegate get!(client, endpoint, headers, params), to: OAuth2.Client
+  defdelegate get(client, endpoint), to: OAuth2.Client
+  defdelegate get(client, endpoint, headers), to: OAuth2.Client
+  defdelegate get(client, endpoint, headers, params), to: OAuth2.Client
 
   defp client_id, do: Application.get_env(:xmart_things, :client_id)
   defp client_secret, do: Application.get_env(:xmart_things, :client_secret)
