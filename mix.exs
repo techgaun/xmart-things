@@ -33,7 +33,7 @@ defmodule XmartThings.Mixfile do
   defp deps do
     [
       {:oauth2, "~> 0.8.2"},
-      {:poison, "~> 3.0"},
+      {:poison, "~> 2.0 or ~> 3.0"},
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev}
     ]
