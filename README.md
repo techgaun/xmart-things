@@ -76,6 +76,10 @@ XmartThings.get(%{st_client | site: uri}, "/locks")
 XmartThings.get(st_client, "/locks")
 ```
 
+## Example
+
+A sample implementation that interacts with *Locks* is available [HERE](https://github.com/techgaun/xmart-things-demo)
+
 ## Author
 
 - [techgaun](https://github.com/techgaun)
