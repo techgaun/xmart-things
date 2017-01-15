@@ -3,7 +3,7 @@ defmodule XmartThings.Mixfile do
 
   def project do
     [app: :xmart_things,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 1.3",
      description: "SmartThings OAuth2 Strategy and Client for Elixir",
      source_url: "https://github.com/techgaun/xmart-things",

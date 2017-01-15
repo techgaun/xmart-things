@@ -1,5 +1,7 @@
 # xmart_things
 
+[![Hex version](https://img.shields.io/hexpm/v/xmart_things.svg "Hex version")](https://hex.pm/packages/xmart_things) ![Hex downloads](https://img.shields.io/hexpm/dt/xmart_things.svg "Hex downloads")
+
 > SmartThings OAuth2 Strategy and Client for Elixir
 
 This was implemented while I followed [this](http://docs.smartthings.com/en/latest/smartapp-web-services-developers-guide/overview.html) but can be used for all the needs to build Web Services SmartApps with SmartThings.
