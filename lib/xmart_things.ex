@@ -48,10 +48,10 @@ defmodule XmartThings do
   def client do
     OAuth2.Client.new([
       strategy: __MODULE__,
-      client_id: client_id,
-      client_secret: client_secret,
-      redirect_uri: redirect_uri,
-      site: site,
+      client_id: client_id(),
+      client_secret: client_secret(),
+      redirect_uri: redirect_uri(),
+      site: site(),
       authorize_url: "https://graph.api.smartthings.com/oauth/authorize",
       token_url: "https://graph.api.smartthings.com/oauth/token"
     ])
@@ -61,7 +61,7 @@ defmodule XmartThings do
   Creates authorization URL based on the `client` configuration
   """
   def authorize_url! do
-    OAuth2.Client.authorize_url!(client, scope: scope)
+    OAuth2.Client.authorize_url!(client(), scope: scope())
   end
 
   @doc """
