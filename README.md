@@ -76,6 +76,22 @@ XmartThings.get(%{st_client | site: uri}, "/locks")
 XmartThings.get(st_client, "/locks")
 ```
 
+## Parent-Child Apps
+
+If you have parent and child apps on smartthings and you get an error with oAuth, you might need to add `oauth: true` in your child apps definition. This happens when your child apps have access to devices but parents have access only through the child apps.
+
+```groovy
+definition(
+    name: "Some Child App",
+    namespace: "techgaun",
+    author: "techgaun",
+    description: "Some child app",
+    category: "",
+    oauth: true,
+    parent: "smartthings_something:sometest"
+)
+```
+
 ## Example
 
 A sample implementation that interacts with *Locks* is available [HERE](https://github.com/techgaun/xmart-things-demo)
