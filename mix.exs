@@ -7,7 +7,7 @@ defmodule XmartThings.Mixfile do
      elixir: "~> 1.3",
      description: "SmartThings OAuth2 Strategy and Client for Elixir",
      source_url: "https://github.com/techgaun/xmart-things",
-     package: package,
+     package: package(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      docs: [extras: ["README.md"]],

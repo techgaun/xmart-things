@@ -144,8 +144,6 @@ defmodule XmartThings do
   defp client_id, do: Application.get_env(:xmart_things, :client_id)
   defp client_secret, do: Application.get_env(:xmart_things, :client_secret)
   defp redirect_uri, do: Application.get_env(:xmart_things, :redirect_uri)
-  defp display_link, do: Application.get_env(:xmart_things, :display_link)
-  defp display_name, do: Application.get_env(:xmart_things, :display_name)
   defp scope, do: Application.get_env(:xmart_things, :scope) || "app"
   defp site, do: :xmart_things |> Application.get_env(:app_uuid) |> _site
   defp _site(uuid) when is_binary(uuid), do: @default_site <> "/api/smartapps/installations/" <> uuid
