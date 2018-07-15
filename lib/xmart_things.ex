@@ -46,7 +46,7 @@ defmodule XmartThings do
   Creates a OAuth client struct for SmartThings Authorization
   """
   def client do
-    OAuth2.Client.new([
+    OAuth2.Client.new(
       strategy: __MODULE__,
       client_id: client_id(),
       client_secret: client_secret(),
@@ -54,7 +54,7 @@ defmodule XmartThings do
       site: site(),
       authorize_url: "https://graph.api.smartthings.com/oauth/authorize",
       token_url: "https://graph.api.smartthings.com/oauth/token"
-    ])
+    )
   end
 
   @doc """
@@ -146,6 +146,9 @@ defmodule XmartThings do
   defp redirect_uri, do: Application.get_env(:xmart_things, :redirect_uri)
   defp scope, do: Application.get_env(:xmart_things, :scope) || "app"
   defp site, do: :xmart_things |> Application.get_env(:app_uuid) |> _site
-  defp _site(uuid) when is_binary(uuid), do: @default_site <> "/api/smartapps/installations/" <> uuid
+
+  defp _site(uuid) when is_binary(uuid),
+    do: @default_site <> "/api/smartapps/installations/" <> uuid
+
   defp _site(_), do: @default_site
 end
